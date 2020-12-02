@@ -28,4 +28,4 @@ Secondary repo for AoCv2020 for experiments in Go!
                o(  )_-\
                  `"""` `
 
-art by jgs - (source) [https://asciiart.website/index.php?art=holiday/christmas/trees]
+art by jgs - [source](https://asciiart.website/index.php?art=holiday/christmas/trees)
