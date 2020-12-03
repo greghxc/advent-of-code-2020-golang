@@ -31,8 +31,8 @@ func partOne(input []string) (validCount int) {
 func partTwo(input []string) (validCount int) {
 	for _, line := range input {
 		pp := parsePasswordProfile(line)
-		firstMatches := pp.lower > 0 && string(pp.password[pp.lower-1]) == pp.reqChar
-		secondMatches := pp.lower < len(pp.password) && string(pp.password[pp.upper-1]) == pp.reqChar
+		firstMatches := string(pp.password[pp.lower-1]) == pp.reqChar
+		secondMatches := string(pp.password[pp.upper-1]) == pp.reqChar
 		if firstMatches != secondMatches {
 			validCount++
 		}
