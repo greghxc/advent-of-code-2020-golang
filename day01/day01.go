@@ -8,12 +8,12 @@ import (
 	"github.com/greghxc/aoc2020go/perfutil"
 )
 
-func partOne(input map[int]bool) (answer int) {
+func partOne(input []int) (answer int) {
 	return sub(2020, input)
 }
 
-func partTwo(input map[int]bool) (answer int) {
-	for i := range input {
+func partTwo(input []int) (answer int) {
+	for _, i := range input {
 		s := sub(2020-i, input)
 		if s > 0 {
 			return i * s
@@ -22,20 +22,21 @@ func partTwo(input map[int]bool) (answer int) {
 	return
 }
 
-func sub(total int, seen map[int]bool) (product int) {
-	for k := range seen {
+func sub(total int, vals []int) (product int) {
+	seen := make(map[int]bool)
+	for _, k := range vals {
 		if seen[total-k] {
 			return k * (total - k)
 		}
+		seen[k] = true
 	}
 	return
 }
 
-func makeIntSet(strings []string) (ints map[int]bool) {
-	ints = make(map[int]bool)
-	for _, v := range strings {
-		i, _ := strconv.Atoi(v)
-		ints[i] = true
+func makeIntList(strings []string) (ints []int) {
+	for _, i := range strings {
+		j, _ := strconv.Atoi(i)
+		ints = append(ints, j)
 	}
 	return
 }
@@ -43,8 +44,8 @@ func makeIntSet(strings []string) (ints map[int]bool) {
 func main() {
 	lines := fileutil.GetFileAsStrings("./day01/day01.txt")
 
-	times := 1000
+	times := 1
 	fmt.Println("=== Day 01 ===")
-	perfutil.Measure(times, func() string { return "Part One: " + strconv.Itoa(partOne(makeIntSet(lines))) })
-	perfutil.Measure(times, func() string { return "Part Two: " + strconv.Itoa(partTwo(makeIntSet(lines))) })
+	perfutil.Measure(times, func() string { return "Part One: " + strconv.Itoa(partOne(makeIntList(lines))) })
+	perfutil.Measure(times, func() string { return "Part Two: " + strconv.Itoa(partTwo(makeIntList(lines))) })
 }
